@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Showcase</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Car Showcase</h1>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search by brand...">
+            <div class="price-filters">
+                <input type="number" id="minPrice" placeholder="Min Price">
+                <input type="number" id="maxPrice" placeholder="Max Price">
+                <button id="searchButton">Search</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="vehicleGrid" class="vehicle-grid"></div>
+
+        <div class="add-vehicle-form">
+            <h2>Add New Vehicle</h2>
+            <form id="vehicleForm">
+                <input type="text" name="brand" placeholder="Brand" required>
+                <input type="text" name="model" placeholder="Model" required>
+                <input type="number" name="year" placeholder="Year" required>
+                <input type="number" name="price" placeholder="Price" required>
+                <input type="url" name="imageUrl" placeholder="Image URL" required>
+                <textarea name="description" placeholder="Description" required></textarea>
+                
+                <div class="specifications">
+                    <h3>Specifications</h3>
+                    <input type="text" name="engine" placeholder="Engine">
+                    <input type="text" name="transmission" placeholder="Transmission">
+                    <input type="text" name="mileage" placeholder="Mileage">
+                    <input type="text" name="fuelType" placeholder="Fuel Type">
+                </div>
+
+                <button type="submit">Add Vehicle</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Car Showcase</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
