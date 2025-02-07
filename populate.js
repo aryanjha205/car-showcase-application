@@ -1,3 +1,5 @@
+// populate.js
+
 const mongoose = require('mongoose');
 
 // MongoDB Connection URL
@@ -10,7 +12,7 @@ const sampleVehicles = [
         model: "M5",
         year: 2024,
         price: 105000,
-        imageUrl: "https://imgd.aeplcdn.com/664x374/n/cw/ec/192747/m5-exterior-right-front-three-quarter-2.jpeg",
+        imageUrl: "https://www.stratstone.com/-/media/stratstone/blog/2024/top-10-best-supercars-of-2024/mclaren-750s-driving-dynamic-hero-1920x774px.ashx",
         description: "M5 Competition with 717 bhp",
         specifications: {
             engine: "4395 cc",
@@ -24,7 +26,7 @@ const sampleVehicles = [
         model: "Phantom",
         year: 2024,
         price: 450000,
-        imageUrl: "https://imgd.aeplcdn.com/664x374/n/cw/ec/30181/phantom-exterior-right-front-three-quarter.jpeg",
+        imageUrl: "https://www.kia.com/content/dam/kia2/in/en/our-vehicles/syros/sec-2/section_2_PC.jpg",
         description: "Phantom Sedan with ultimate luxury",
         specifications: {
             engine: "6749 cc",
