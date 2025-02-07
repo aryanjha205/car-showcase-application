@@ -1,0 +1,119 @@
+<!-- edit.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Vehicle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>DELETE</h1>
+        <form class="action-buttons">
+            <button type="submit" formaction="index.html" class="btn add-btn">HOME</button>
+          </form> 
+    </header>
+
+    <main>
+        <form id="editVehicleForm">
+            <label for="vehicleSelect">Select Vehicle:</label>
+            <select id="vehicleSelect" required></select>
+            
+            <input type="text" id="brand" name="brand" placeholder="Brand" required>
+            <input type="text" id="model" name="model" placeholder="Model" required>
+            <input type="number" id="year" name="year" placeholder="Year" required>
+            <input type="number" id="price" name="price" placeholder="Price" required>
+            <input type="url" id="imageUrl" name="imageUrl" placeholder="Image URL" required>
+            <textarea id="description" name="description" placeholder="Description" required></textarea>
+            
+            <div class="specifications">
+                <h3>Specifications</h3>
+                <input type="text" id="engine" name="engine" placeholder="Engine">
+                <input type="text" id="transmission" name="transmission" placeholder="Transmission">
+                <input type="text" id="mileage" name="mileage" placeholder="Mileage">
+                <input type="text" id="fuelType" name="fuelType" placeholder="Fuel Type">
+            </div>
+
+            <button type="submit">Update Vehicle</button>
+            <button type="button" id="deleteVehicle">Delete Vehicle</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Car Showcase</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const vehicleSelect = document.getElementById('vehicleSelect');
+            const editForm = document.getElementById('editVehicleForm');
+            const deleteButton = document.getElementById('deleteVehicle');
+            const API_URL = 'http://localhost:3000/api/vehicles';
+
+            async function fetchVehicles() {
+                const response = await fetch(API_URL);
+                const vehicles = await response.json();
+                vehicleSelect.innerHTML = vehicles.map(vehicle => `<option value="${vehicle._id}">${vehicle.brand} ${vehicle.model}</option>`).join('');
+                loadVehicleData(vehicles[0]._id);
+            }
+
+            async function loadVehicleData(vehicleId) {
+                const response = await fetch(`${API_URL}/${vehicleId}`);
+                const vehicle = await response.json();
+                document.getElementById('brand').value = vehicle.brand;
+                document.getElementById('model').value = vehicle.model;
+                document.getElementById('year').value = vehicle.year;
+                document.getElementById('price').value = vehicle.price;
+                document.getElementById('imageUrl').value = vehicle.imageUrl;
+                document.getElementById('description').value = vehicle.description;
+                document.getElementById('engine').value = vehicle.specifications.engine;
+                document.getElementById('transmission').value = vehicle.specifications.transmission;
+                document.getElementById('mileage').value = vehicle.specifications.mileage;
+                document.getElementById('fuelType').value = vehicle.specifications.fuelType;
+            }
+
+            vehicleSelect.addEventListener('change', () => {
+                loadVehicleData(vehicleSelect.value);
+            });
+
+            editForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const updatedVehicle = {
+                    brand: document.getElementById('brand').value,
+                    model: document.getElementById('model').value,
+                    year: parseInt(document.getElementById('year').value),
+                    price: parseInt(document.getElementById('price').value),
+                    imageUrl: document.getElementById('imageUrl').value,
+                    description: document.getElementById('description').value,
+                    specifications: {
+                        engine: document.getElementById('engine').value,
+                        transmission: document.getElementById('transmission').value,
+                        mileage: document.getElementById('mileage').value,
+                        fuelType: document.getElementById('fuelType').value
+                    }
+                };
+
+                await fetch(`${API_URL}/${vehicleSelect.value}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedVehicle)
+                });
+
+                alert('Vehicle updated successfully!');
+                fetchVehicles();
+            });
+
+            deleteButton.addEventListener('click', async () => {
+                if (confirm('Are you sure you want to delete this vehicle?')) {
+                    await fetch(`${API_URL}/${vehicleSelect.value}`, { method: 'DELETE' });
+                    alert('Vehicle deleted successfully!');
+                    fetchVehicles();
+                }
+            });
+
+            fetchVehicles();
+        });
+    </script>
+</body>
+</html>
