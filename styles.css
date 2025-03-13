@@ -13,20 +13,32 @@ body {
 header {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
-    padding: 2rem;
-    text-align: center;
+    padding: 1rem; /* Reduced padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* Prevent wrapping */
 }
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .search-bar {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem; /* Reduced gap */
     margin-top: 1.5rem;
+    margin-right: 3px; /* Added margin */
 }
 
 .search-bar input {
     padding: 0.6rem;
-    width: 3000px; /* Adjusted width */
+    width: 200px; /* Adjusted width */
     border: none;
     border-radius: 4px;
     font-size: 1rem;
@@ -41,6 +53,7 @@ header {
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
+    margin-right: 3px; /* Added margin from right */
 }
 
 #searchButton:hover {
@@ -57,13 +70,15 @@ header {
 }
 
 .btn {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
     font-weight: bold;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: transform 0.2s, opacity 0.3s;
+    width: 200px; /* Added width */
+    height: 50px; /* Added height */
 }
 
 .add-btn {
@@ -74,6 +89,15 @@ header {
 .delete-btn {
     background-color: #dc3545;
     color: white;
+}
+
+.logout-btn {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 0.6rem 1rem; /* Adjusted padding */
+    font-size: 0.4rem; /* Adjusted font size */
+    width: 200px; /* Added width */
+    height: 50px; /* Added height */
 }
 
 .btn:hover {
@@ -267,4 +291,33 @@ button:hover {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
     margin-top: 0.5rem;
+}
+
+.ad-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 190px; /* Adjusted width */
+    height: 60px; /* Adjusted height */
+    background-color: white;
+    border-radius: 8px; /* Changed to 8px for square corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-around; /* Adjusted to space items evenly */
+    text-align: center;
+    padding: 10px;
+    transition: opacity 0.3s;
+}
+
+.ad-notification img {
+    width: 70px; /* Adjusted width */
+    height: 50px; /* Adjusted height */
+    border-radius: 8px; /* Changed to 8px for square corners */
+}
+
+.ad-notification p {
+    margin-left: 10px; /* Adjusted margin */
+    font-size: 0.8rem; /* Adjusted font size */
+    color: #333;
 }

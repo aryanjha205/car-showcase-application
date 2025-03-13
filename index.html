@@ -5,42 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Showcase</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to login page if not authenticated
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 <body>
-    <header>
+
+    <header class="header-container">
         <h1>Car Showcase</h1>
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search by brand...">
             <button id="searchButton">Search</button>
-            <select id="colorFilter">
-                <option value="">All Colors</option>
-                <option value="Red">Red</option>
-                <option value="Blue">Blue</option>
-                <option value="Black">Black</option>
-                <option value="White">White</option>
-            </select>
-            
-            <select id="sortPrice">
-                <option value="">Sort by</option>
-                <option value="low-to-high">Price: Low to High</option>
-            </select>
-            
         </div>
-             <form class="action-buttons">
-                <button type="submit" formaction="add.html" class="btn add-btn">Add New Car</button>
-                <button type="submit" formaction="delete.html" class="btn delete-btn">Delete & Update Car</button>
-              </form> 
-        </div>
+        <form class="action-buttons">
+            <button type="submit" formaction="admin.html" class="btn add-btn">ADMIN</button>
+            <button type="button" id="profileButton" class="btn profile-btn">Profile</button> <!-- Added profile button -->
+            <button type="button" id="logoutButton" class="btn logout-btn">Logout</button> <!-- Adjusted logout button -->
+        </form>
     </header>
 
     <main>
         <div id="vehicleGrid" class="vehicle-grid"></div>
-            <form id="vehicleForm">
+        <form id="vehicleForm"></form> <!-- Ensure the form is properly closed -->
+        <div id="profileSection" class="profile-section"></div> <!-- Added profile section -->
     </main>
 
     <footer>
         <p>&copy; 2025 Car Showcase</p>
     </footer>
+
+    <div id="adNotification" class="ad-notification">
+        <img id="adLogo" src="" alt="Brand Logo">
+        <p id="adText"></p>
+    </div>
 
     <script src="script.js"></script>
 </body>

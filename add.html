@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Car</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to login page if not authenticated
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 <body>
     <header>
         <h1>Add New Car</h1>
         <form class="action-buttons">
+            <button type="submit" formaction="admin-dashboard.html" class="btn add-btn">Admin-Dashboard</button>
             <button type="submit" formaction="index.html" class="btn add-btn">HOME</button>
-          </form> 
+        </form> 
     </header>
-    <main
-
+    <main>
         <div class="add-vehicle-form">
             <h2>Add New Vehicle</h2>
             <form id="vehicleForm">
@@ -35,6 +41,11 @@
 
                 <button type="submit">Add Vehicle</button>
             </form>
+            <h2>Upload Excel File</h2>
+            <form id="excelForm" enctype="multipart/form-data">
+                <input type="file" id="excelFile" name="excelFile" accept=".xlsx" required>
+                <button type="submit">Upload</button>
+            </form>
         </div>
     </main>
 
@@ -44,5 +55,4 @@
     <script src="script.js"></script>
 </body>
 </html>
-```
 

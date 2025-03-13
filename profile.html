@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to login page if not authenticated
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <header class="header-container">
+        <h1>User Profile</h1>
+        <button type="button" id="logoutButton" class="btn logout-btn">Logout</button>
+        
+    </header>
+    <main>
+        
+        
+        <div id="profileSection" class="profile-section"></div>
+
+        
+    </main>
+
+    <script src="profile.js"></script>
+</body>
+</html>

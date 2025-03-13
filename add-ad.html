@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Ad</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to login page if not authenticated
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Add New Ad</h1>
+        <form class="action-buttons">
+           <button type="submit" formaction="admin-dashboard.html" class="btn add-btn">Admin-Dashboard</button>
+           <button type="submit" formaction="index.html" class="btn add-btn">HOME</button>
+        </form> 
+    </header>
+    <main>
+        <div class="add-ad-form">
+            <h2>Add New Ad</h2>
+            <form id="adForm">
+                <input type="url" name="logoUrl" placeholder="Logo URL" required>
+                <textarea name="text" placeholder="Ad Text" required></textarea>
+                <input type="url" name="redirectUrl" placeholder="Redirect URL" required>
+                <button type="submit">Add Ad</button>
+            </form>
+        </div>
+        <div class="edit-ad-form">
+            <h2>Edit Ad</h2>
+            <form id="adForm">
+                <label for="adSelect">Select Ad:</label>
+                <select id="adSelect" required></select>
+                <input type="url" id="logoUrl" name="logoUrl" placeholder="Logo URL" required>
+                <textarea id="text" name="text" placeholder="Ad Text" required></textarea>
+                <input type="url" id="redirectUrl" name="redirectUrl" placeholder="Redirect URL" required>
+                <button type="submit">Update Ad</button>
+                <button type="button" id="deleteAd">Delete Ad</button>
+            </form>
+        </div>
+        <div id="adDisplay" class="ad-display"></div> <!-- New container for displaying ads -->
+    </main>
+    <footer>
+        <p>&copy; 2025 Car Showcase</p>
+    </footer>
+    <script src="ad-script.js"></script>
+</body>
+</html>

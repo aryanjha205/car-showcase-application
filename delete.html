@@ -6,11 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Vehicle</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Redirect to login page if not authenticated
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'login.html';
+        }
+    </script>
 </head>
 <body>
     <header>
-        <h1>DELETE</h1>
+        <h1>DELETE AND UPDATE CAR</h1>
         <form class="action-buttons">
+            <button type="submit" formaction="admin-dashboard.html" class="btn add-btn">Admin-Dashboard</button>
             <button type="submit" formaction="index.html" class="btn add-btn">HOME</button>
           </form> 
     </header>
@@ -114,6 +121,9 @@
 
             fetchVehicles();
         });
+
+ 
+
     </script>
 </body>
 </html>
