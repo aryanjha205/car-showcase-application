@@ -1,3 +1,5 @@
+require('dotenv').config(); // Add this line at the top
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -8,8 +10,8 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 
 const app = express();
-const PORT = 3000;
-const JWT_SECRET = 'your_jwt_secret'; // Replace with a secure secret
+const PORT = process.env.PORT || 3000; // Update to use environment variable
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Update to use environment variable
 
 // Middleware
 app.use(cors());
@@ -17,7 +19,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client')));
 
 // MongoDB Connection URL
-const MONGODB_URI = 'mongodb://localhost:27017/carShowcase';
+const MONGODB_URI = process.env.MONGODB_URI; // Update to use environment variable
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, {
