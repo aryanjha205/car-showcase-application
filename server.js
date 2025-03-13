@@ -315,7 +315,12 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Export the app for Vercel
+module.exports = app;
+
+// Start server (only if not in Vercel)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
