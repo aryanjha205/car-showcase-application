@@ -80,7 +80,10 @@ function authenticateToken(req, res, next) {
     if (!token) return res.sendStatus(401);
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
+        if (err) {
+            console.error('JWT verification error:', err);
+            return res.sendStatus(403);
+        }
         req.user = user;
         next();
     });
@@ -97,6 +100,7 @@ app.post('/api/signup', async (req, res) => {
         await newUser.save();
         res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
+        console.error('Signup error:', error);
         res.status(400).json({ error: error.message });
     }
 });
@@ -112,6 +116,7 @@ app.post('/api/login', async (req, res) => {
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(400).json({ error: error.message });
     }
 });
@@ -123,6 +128,7 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.json(user);
     } catch (error) {
+        console.error('Profile retrieval error:', error);
         res.status(500).json({ error: error.message });
     }
 });
