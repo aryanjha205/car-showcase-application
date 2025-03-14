@@ -1,5 +1,3 @@
-require('dotenv').config(); // Add this line at the top
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -10,8 +8,8 @@ const multer = require('multer');
 const xlsx = require('xlsx');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Update to use environment variable
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret'; // Update to use environment variable
+const PORT = 3000;
+const JWT_SECRET = 'your_jwt_secret'; // Replace with a secure secret
 
 // Middleware
 app.use(cors());
@@ -19,7 +17,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client')));
 
 // MongoDB Connection URL
-const MONGODB_URI = process.env.MONGODB_URI; // Update to use environment variable
+const MONGODB_URI = 'mongodb://localhost:27017/carShowcase';
 
 // Connect to MongoDB
 mongoose.connect(MONGODB_URI, {
@@ -80,10 +78,7 @@ function authenticateToken(req, res, next) {
     if (!token) return res.sendStatus(401);
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) {
-            console.error('JWT verification error:', err);
-            return res.sendStatus(403);
-        }
+        if (err) return res.sendStatus(403);
         req.user = user;
         next();
     });
@@ -100,7 +95,6 @@ app.post('/api/signup', async (req, res) => {
         await newUser.save();
         res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
-        console.error('Signup error:', error);
         res.status(400).json({ error: error.message });
     }
 });
@@ -116,7 +110,6 @@ app.post('/api/login', async (req, res) => {
         const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
         res.json({ token });
     } catch (error) {
-        console.error('Login error:', error);
         res.status(400).json({ error: error.message });
     }
 });
@@ -128,7 +121,6 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
         if (!user) return res.status(404).json({ message: 'User not found' });
         res.json(user);
     } catch (error) {
-        console.error('Profile retrieval error:', error);
         res.status(500).json({ error: error.message });
     }
 });
@@ -321,12 +313,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
-// Export the app for Vercel
-module.exports = app;
-
-// Start server (only if not in Vercel)
-if (process.env.NODE_ENV !== 'production') {
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
+// Start server
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
